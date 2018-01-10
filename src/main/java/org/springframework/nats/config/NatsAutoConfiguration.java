@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import java.util.concurrent.TimeUnit;
+
 @org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(NatsProperties.class)
 @ConditionalOnClass(Nats.class)
@@ -26,9 +28,11 @@ public class NatsAutoConfiguration {
             natsConnector.addHost(DEFAULT_NATS_HOST);
         }
         natsConnector.pedantic(properties.isPedantic());
+        natsConnector.reconnectWaitTime(properties.getReconnectWaitTime(), TimeUnit.MILLISECONDS);
         natsConnector.idleTimeout(properties.getIdleTimeout());
         natsConnector.maxFrameSize(properties.getMaxFrameSize());
         natsConnector.pingInterval(properties.getPingInterval());
+        natsConnector.automaticReconnect(true);
         return natsConnector.connect();
     }
 

@@ -16,8 +16,6 @@ public class NatsProperties {
 
     private long pingInterval = Constants.DEFAULT_PING_INTERVAL;
 
-    private long reconnectWaitTime = Constants.DEFAULT_RECONNECT_TIME_WAIT;
-
     private boolean pedantic = false;
 
     public String[] getUrls() {
@@ -58,14 +56,6 @@ public class NatsProperties {
 
     public void setPingInterval(long pingInterval) {
         this.pingInterval = pingInterval;
-    }
-
-    public long getReconnectWaitTime() {
-        return reconnectWaitTime;
-    }
-
-    public void setReconnectWaitTime(long reconnectWaitTime) {
-        this.reconnectWaitTime = reconnectWaitTime;
     }
 
     public boolean isPedantic() {
